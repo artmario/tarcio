@@ -1,4 +1,4 @@
-[![Stories in Ready](https://badge.waffle.io/artmario/tarcio.png?label=ready&title=Ready)](https://waffle.io/artmario/tarcio?utm_source=badge)
+[![Throughput Graph](https://graphs.waffle.io/hertzMotors/tarcio/throughput.svg)](https://waffle.io/hertzMotors/tarcio/metrics/throughput)
 # tarcio
 bat_vision
 pronto ggwp
