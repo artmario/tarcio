@@ -11,6 +11,8 @@
 #include "U8g2lib.h"
 #include "images.h"
 #include <stdlib.h>
+#include "view.c"
+
 
 Adafruit_ADS1115 ads(0x48);
 
@@ -36,36 +38,21 @@ unsigned long previousMillis = 0;
 unsigned long millisPassed = 0;
 
 boolean debug = false;
-void tela()
-{
-      u8g2.begin();
-      u8g2.drawXBMP(31,0,64,64,Boobs);
-      u8g2.sendBuffer();
-      delay(8000);
-      Serial.println("Starting");
-      Serial.println("Battery Checker v0.8");
-      Serial.println("time   battVolt   current     mAh");	
-      u8g2.drawXBMP(0,0,128,64,Empty); 
-      u8g2.drawFrame(0,0,127,63);
-      u8g2.drawXBMP(2,2,17,10,Battery);
-      u8g2.drawXBMP(27,2,17,10,Thunder);
-      u8g2.sendBuffer();
-      u8g2.setFont(u8g2_font_baby_tr);
-}
+
 void setup() { 
       Serial.begin(9600);
       ads.begin(); 
-      tela();
+      telaInit();
+      medidorInit();
         
 }
+int16_t adc0;  // ADC raw read fist value
+int16_t adc1;  // ADC raw read second value
+int16_t adc2;  // ADC raw read third value
  
  
-void loop() { 
-   int16_t adc0;  // ADC raw read fist value
-   int16_t adc1;  // ADC raw read second value
-   int16_t adc2;  // ADC raw read third value
-
-   adc0 = ads.readADC_SingleEnded(0);
+void loop() 
+{adc0 = ads.readADC_SingleEnded(0);
    adc1 = ads.readADC_SingleEnded(1);  
    adc2 = ads.readADC_SingleEnded(2); 
    extVolt = (adc2 * 0.1875)/1000; 
